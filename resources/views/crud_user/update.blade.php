@@ -172,6 +172,37 @@
                 @endif
             </div>
 
+            
+            <div class="form-group">
+                <label for="age">Age</label>
+                <input
+                    type="age"
+                    id="age"
+                    name="age"
+                    value="{{ $user->age }}"
+                    required
+                />
+                @if ($errors->has('age'))
+                    <span class="text-danger">{{ $errors->first('age') }}</span>
+                @endif
+            </div>
+
+            <div class="form-group">
+                <label for="like">like</label>
+                <input
+                    type="like"
+                    id="like"
+                    name="like"
+                    value="{{ $user->like }}"
+                    required
+                />
+                @if ($errors->has('like'))
+                    <span class="text-danger">{{ $errors->first('like') }}</span>
+                @endif
+            </div>
+
+            
+
 
             <div class="form-group">
                 <label for="password">Password</label>

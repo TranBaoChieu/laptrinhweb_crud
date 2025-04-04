@@ -77,6 +77,22 @@
                     <span class="text-danger">{{ $errors->first('email') }}</span>
                 @endif
             </div>
+
+            <div class="form-group">
+                <label for="age">age</label>
+                <input type="age" id="age" name="age" value="{{ old('age') }}" required>
+                @if ($errors->has('age'))
+                    <span class="text-danger">{{ $errors->first('age') }}</span>
+                @endif
+            </div>
+
+            <div class="form-group">
+                <label for="like">like</label>
+                <input type="like" id="like" name="like" value="{{ old('like') }}" required>
+                @if ($errors->has('like'))
+                    <span class="text-danger">{{ $errors->first('like') }}</span>
+                @endif
+            </div>
             
             <div class="form-group">
                 <label for="password">Password</label>

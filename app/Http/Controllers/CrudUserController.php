@@ -59,6 +59,8 @@ class CrudUserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
+            'age' => 'required',
+            'like' => 'required',
              // Validate address
         ]);
 
@@ -67,6 +69,8 @@ class CrudUserController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'age' => $data['age'],
+            'like' => $data['like'],
         ]);
 
         return redirect("login");
@@ -116,12 +120,16 @@ class CrudUserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users,email,' . $input['id'], // Sửa unique để kiểm tra email trừ chính user đang cập nhật
             'password' => 'required|min:6',
+            'age' => 'age',
+            'like' => 'like',
         ]);
 
         $user = User::find($input['id']);
         $user->name = $input['name'];
         $user->email = $input['email'];
         $user->password = Hash::make($input['password']); // Mã hóa password
+        $user->age = $input['age'];
+        $user->like = $input['like'];
         $user->save();
 
         return redirect("list")->withSuccess('User updated successfully');
