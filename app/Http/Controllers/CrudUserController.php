@@ -61,19 +61,29 @@ class CrudUserController extends Controller
             'password' => 'required|min:6',
             'age' => 'required',
             'like' => 'required',
-             // Validate address
+            'avatar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Validate ảnh
         ]);
 
         $data = $request->all();
-        $check = User::create([
+
+        // Xử lý upload ảnh
+        if ($request->hasFile('avatar')) {
+            $file = $request->file('avatar');
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('img'), $fileName); // Lưu ảnh vào thư mục public/img
+            $data['avatar'] = 'img/' . $fileName; // Lưu đường dẫn vào DB
+        }
+
+        User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'age' => $data['age'],
             'like' => $data['like'],
+            'avatar' => $data['avatar'] ?? null, // Lưu đường dẫn avatar
         ]);
 
-        return redirect("login");
+        return redirect("login")->withSuccess('User created successfully');
     }
 
     /**
@@ -93,9 +103,9 @@ class CrudUserController extends Controller
     public function deleteUser(Request $request)
     {
         $user_id = $request->get('id');
-        $user = User::destroy($user_id);
+        User::destroy($user_id);
 
-        return redirect("list")->withSuccess('You have signed-in');
+        return redirect("list")->withSuccess('User deleted successfully');
     }
 
     /**
@@ -120,9 +130,18 @@ class CrudUserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users,email,' . $input['id'], // Sửa unique để kiểm tra email trừ chính user đang cập nhật
             'password' => 'required|min:6',
-            'age' => 'age',
-            'like' => 'like',
+            'age' => 'required',
+            'like' => 'required',
+            'avatar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Validate ảnh
         ]);
+
+        // Xử lý upload ảnh
+        if ($request->hasFile('avatar')) {
+            $file = $request->file('avatar');
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('img'), $fileName); // Lưu ảnh vào thư mục public/img
+            $input['avatar'] = 'img/' . $fileName; // Lưu đường dẫn vào DB
+        }
 
         $user = User::find($input['id']);
         $user->name = $input['name'];
@@ -130,6 +149,7 @@ class CrudUserController extends Controller
         $user->password = Hash::make($input['password']); // Mã hóa password
         $user->age = $input['age'];
         $user->like = $input['like'];
+        $user->avatar = $input['avatar'] ?? $user->avatar; // Giữ avatar cũ nếu không upload mới
         $user->save();
 
         return redirect("list")->withSuccess('User updated successfully');

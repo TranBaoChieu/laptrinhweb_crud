@@ -176,7 +176,7 @@
             <div class="form-group">
                 <label for="age">Age</label>
                 <input
-                    type="age"
+                    type="text"
                     id="age"
                     name="age"
                     value="{{ $user->age }}"
@@ -190,7 +190,7 @@
             <div class="form-group">
                 <label for="like">like</label>
                 <input
-                    type="like"
+                    type="text"
                     id="like"
                     name="like"
                     value="{{ $user->like }}"
@@ -201,7 +201,18 @@
                 @endif
             </div>
 
-            
+            <div class="form-group">
+    <label for="avatar">Avatar</label>
+    @if ($user->avatar)
+        <img src="{{ asset($user->avatar) }}" alt="Avatar" class="img-thumbnail mb-3" width="100">
+    @else
+        <span class="text-muted">No avatar</span>
+    @endif
+    <input type="file" id="avatar" name="avatar" class="form-control" accept="image/*">
+    @if ($errors->has('avatar'))
+        <span class="text-danger">{{ $errors->first('avatar') }}</span>
+    @endif
+</div>
 
 
             <div class="form-group">

@@ -56,7 +56,7 @@
         </div>
     </main>
 @endsection
-
+<form action="{{ route('user.postUser') }}" method="POST" enctype="multipart/form-data">
 <div class="signup-container">
         <h1>Create User</h1>
         
@@ -77,19 +77,27 @@
                     <span class="text-danger">{{ $errors->first('email') }}</span>
                 @endif
             </div>
-
             <div class="form-group">
-                <label for="age">age</label>
-                <input type="age" id="age" name="age" value="{{ old('age') }}" required>
+                <label for="age">Age</label>
+                <input type="text" id="age" name="age" value="{{ old('age') }}" required>
                 @if ($errors->has('age'))
                     <span class="text-danger">{{ $errors->first('age') }}</span>
                 @endif
             </div>
 
             <div class="form-group">
+    <label for="avatar">Avatar</label>
+    <input type="file" id="avatar" name="avatar" class="form-control" accept="image/*" required>
+    @if ($errors->has('avatar'))
+        <span class="text-danger">{{ $errors->first('avatar') }}</span>
+    @endif
+</div>
+
+
+            <div class="form-group">
                 <label for="like">like</label>
-                <input type="like" id="like" name="like" value="{{ old('like') }}" required>
-                @if ($errors->has('like'))
+                <input type="text" id="like" name="like" value="{{ old('like') }}" required>
+                @if ($errors->has('age'))
                     <span class="text-danger">{{ $errors->first('like') }}</span>
                 @endif
             </div>

@@ -18,6 +18,7 @@ return new class extends Migration {
             $table->string('password');
             $table->integer('age');
             $table->string('like');
+            $table->string('avatar')->nullable(); // Thêm cột avatar
             $table->rememberToken();
             $table->timestamps();
         });

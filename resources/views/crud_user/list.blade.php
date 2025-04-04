@@ -80,7 +80,7 @@
         </style>
     </head>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
         <div class="container">
             <a class="navbar-brand" href="#">Laravel Training</a>
             <div class="d-flex align-items-center">
@@ -105,6 +105,7 @@
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
+                        <th>Avatar</th> <!-- Thêm cột Avatar -->
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -113,6 +114,13 @@
                         <tr>
                             <td>{{ $user->id }}</td>
                             <td>{{ $user->name }}</td>
+                            <td>
+                                @if($user->avatar)
+                                    <img src="{{ asset($user->avatar) }}" alt="Avatar" class="img-thumbnail" width="50">
+                                @else
+                                    <span class="text-muted">No avatar</span>
+                                @endif
+                            </td>
                             <td class="action-btns">
                                 <a href="{{ route('user.readUser', ['id' => $user->id]) }}" class="btn btn-sm btn-info">View</a>
                                 <a href="{{ route('user.updateUser', ['id' => $user->id]) }}" class="btn btn-sm btn-warning">Edit</a>
@@ -124,5 +132,5 @@
                 </tbody>
             </table>
         </div>
-    </div>
+    </div>  
 <
