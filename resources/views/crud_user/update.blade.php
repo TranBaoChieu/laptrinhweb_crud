@@ -172,33 +172,6 @@
                 @endif
             </div>
 
-            <div class="form-group">
-                <label for="phone">Phone</label>
-                <input
-                    type="text"
-                    id="phone"
-                    name="phone"
-                    value="{{ $user->phone }}"
-                    required
-                />
-                @if ($errors->has('phone'))
-                    <span class="text-danger">{{ $errors->first('phone') }}</span>
-                @endif
-            </div>
-
-            <div class="form-group">
-                <label for="address">Address</label>
-                <input
-                    type="text"
-                    id="address"
-                    name="address"
-                    value="{{ $user->address }}"
-                    required
-                />
-                @if ($errors->has('address'))
-                    <span class="text-danger">{{ $errors->first('address') }}</span>
-                @endif
-            </div>
 
             <div class="form-group">
                 <label for="password">Password</label>

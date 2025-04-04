@@ -79,22 +79,6 @@
             </div>
             
             <div class="form-group">
-                <label for="phone">Phone</label>
-                <input type="tel" id="phone" name="phone" value="{{ old('phone') }}" required>
-                @if ($errors->has('phone'))
-                    <span class="text-danger">{{ $errors->first('phone') }}</span>
-                @endif
-            </div>
-            
-            <div class="form-group">
-                <label for="address">Address</label>
-                <input type="text" id="address" name="address" value="{{ old('address') }}" required>
-                @if ($errors->has('address'))
-                    <span class="text-danger">{{ $errors->first('address') }}</span>
-                @endif
-            </div>
-            
-            <div class="form-group">
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" required>
                 @if ($errors->has('password'))
